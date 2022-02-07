@@ -1,5 +1,4 @@
-# Pythono3 code to rename multiple
-# files in a directory or folder
+# Python 3 code to rename multiple files in a directory or folder
 
 # importing os module
 import os
@@ -7,7 +6,16 @@ import os
 
 # Function to rename multiple files
 def main():
-    folder = input(str("Enter the file directory: "))
+    folder = input(str("Would you like a custom path? (y/n)"))
+    folder.lower()
+    if folder == "y":
+        folder = input(str("Enter the custom path: "))
+        open(folder)
+    if folder == "n":
+        print("No custom path requested. Executing in source folder.")
+    else:
+        print("Invalid input. Will execute program in source folder. ")
+
     find_target = input(str("Enter the word that needs to be replaced: "))
     replace_target = input(str("Enter the desired word to replace the original: "))
 
