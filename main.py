@@ -11,19 +11,24 @@ def main():
     if directory == "":
         print("Directory set to 'images', \n")  # speeds up the code testing by specifying the folder as prepared
         directory = "images/"
+    else:
+        directory += '/'
     old_word = input(str("Enter the word that needs to be replaced: "))
     new_word = input(str("Enter the new word to replace the original: "))
 
-    file_renamer(directory, old_word, new_word)
-    print("Completed!")
+    try:
+        file_renamer(directory, old_word, new_word)
+        print("Completed!")
+    except FileNotFoundError:
+        print("No file or path detected.")
 
 
 def file_renamer(directory, old_word, new_word):
     count = 0
     for file in os.listdir(directory):
         if old_word in file:
-            os.rename(os.path.join(directory+file),
-                      os.path.join(directory+file.replace(old_word, new_word)))
+            os.rename(os.path.join(directory + file),
+                      os.path.join(directory + file.replace(old_word, new_word)))
             count = count + 1  # counts how many times function has been executed
     print(count, "files have been renamed.")
 
