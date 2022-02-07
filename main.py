@@ -6,27 +6,26 @@ import os
 
 # Function to rename multiple files
 def main():
-    folder = input(str("Would you like a custom path? (y/n)"))
-    folder.lower()
-    if folder == "y":
-        folder = input(str("Enter the custom path: "))
-        open(folder)
-    if folder == "n":
-        print("No custom path requested. Executing in source folder.")
-    else:
-        print("Invalid input. Will execute program in source folder. ")
+    print("This is a file renamer tool. \n")
+    directory = input(str("Enter the folder name/path where files need to be renamed: "))
+    if directory == "":
+        print("Directory set to 'images', \n")  # speeds up the code testing by specifying the folder as prepared
+        directory = "images"
+    old_word = input(str("Enter the word that needs to be replaced: "))
+    new_word = input(str("Enter the new word to replace the original: "))
 
-    find_target = input(str("Enter the word that needs to be replaced: "))
-    replace_target = input(str("Enter the desired word to replace the original: "))
-
-    file_renamer(folder, find_target, replace_target)
+    file_renamer(directory, old_word, new_word)
+    print("Completed!")
 
 
-def file_renamer(folder, find_target, replace_target):
-    for file in os.listdir():
-        if find_target(main) in file:
-            os.rename(os.path.join(folder, file),
-                      os.path.join(folder, file.replace(find_target, replace_target)))
+def file_renamer(directory, old_word, new_word):
+    count = 0
+    for file in os.listdir(directory):
+        if old_word in file:
+            os.rename(os.path.join(file),
+                      os.path.join(file.replace(old_word, new_word)))
+        count = count + 1
+    print(count, " files have been renamed.")
 
 
 # Driver Code
