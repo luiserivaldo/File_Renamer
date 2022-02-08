@@ -3,14 +3,17 @@
 # importing os module
 import os
 
-
 # Function to rename multiple files
+import sys
+
+
 def main():
     print("This is a file renamer tool. \n")
     directory = input(str("Enter the folder name/path where files need to be renamed: "))
     if directory == "":
-        print("Directory set to 'images', \n")  # speeds up the code testing by specifying the folder as prepared
+        print("No custom path. Directory set to 'images'. \n")
         directory = "images/"
+        # set target directory to "images" folder within project folder
     else:
         directory += '/'
     old_word = input(str("Enter the word that needs to be replaced: "))
@@ -18,9 +21,16 @@ def main():
 
     try:
         file_renamer(directory, old_word, new_word)
-        print("Completed!")
+        revert_name(directory, new_word, old_word)
+        repeat_tool = input(str("Would you like to rename more files? (Y/N) "))
+        if repeat_tool.lower() == "y" or "yes":
+            file_renamer(directory, old_word, new_word)
+            revert_name(directory, new_word, old_word)
+        else:
+            print("Thank you for using the tool!")
+        sys.exit()
     except FileNotFoundError:
-        print("No file or path detected.")
+        print("No file or path detected. Current directory is ", directory, ".")
 
 
 def file_renamer(directory, old_word, new_word):
@@ -30,7 +40,24 @@ def file_renamer(directory, old_word, new_word):
             os.rename(os.path.join(directory + file),
                       os.path.join(directory + file.replace(old_word, new_word)))
             count = count + 1  # counts how many times function has been executed
-    print(count, "files have been renamed.")
+    print(count, "files have been renamed. \n")
+    print("Please check your files if they have been properly renamed. \n")
+
+
+def revert_name(directory, new_word, old_word):
+    revert_changes = input(str("Would you like to revert the changes? [Y/N] "))
+    if revert_changes.lower() == "y":
+        count = 0
+        for file in os.listdir(directory):
+            if new_word in file:
+                os.rename(os.path.join(directory + file),
+                          os.path.join(directory + file.replace(new_word, old_word)))
+                # inverse process of renaming, results in the original file names
+                count = count + 1
+        print(count, "files have been reverted. \n")
+    else:
+        print("Thank you for using the tool!")
+        sys.exit()
 
 
 # Driver Code
