@@ -22,13 +22,7 @@ def main():
     try:
         file_renamer(directory, old_word, new_word)
         revert_name(directory, new_word, old_word)
-        repeat_tool = input(str("Would you like to rename more files? (Y/N) "))
-        if repeat_tool.lower() == "y" or "yes":
-            file_renamer(directory, old_word, new_word)
-            revert_name(directory, new_word, old_word)
-        else:
-            print("Thank you for using the tool!")
-        sys.exit()
+        # repeat_tool()
     except FileNotFoundError:
         print("No file or path detected. Current directory is ", directory, ".")
 
@@ -56,7 +50,20 @@ def revert_name(directory, new_word, old_word):
                 count = count + 1
         print(count, "files have been reverted. \n")
     else:
+        print("No files reverted.")
+
+
+def repeat_tool():
+    repeat_input = input(str("Would you like to rename more files? [Y/N] "))
+    if repeat_input.lower() == "y" or "yes":
+        print("Restarting tool... \n")
+        print(repeat_input)
+        main()
+    elif repeat_input.lower == "n" or "no":
+        print(repeat_input)
         print("Thank you for using the tool!")
+    else:
+        print("Invalid input. Closing tool.")
         sys.exit()
 
 
