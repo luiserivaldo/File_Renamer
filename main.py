@@ -3,9 +3,6 @@
 # importing os module
 import os
 
-# Function to rename multiple files
-import sys
-
 
 def main():
     print("This is a file renamer tool. \n")
@@ -21,7 +18,7 @@ def main():
 
     try:
         file_renamer(directory, old_word, new_word)
-        # revert_name(directory, new_word, old_word)
+        revert_name(directory, new_word, old_word)
         repeat_tool()
     except FileNotFoundError:
         print("No file or path detected. Current directory is ", directory, ".")
