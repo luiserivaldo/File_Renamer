@@ -21,8 +21,8 @@ def main():
 
     try:
         file_renamer(directory, old_word, new_word)
-        revert_name(directory, new_word, old_word)
-        # repeat_tool()
+        # revert_name(directory, new_word, old_word)
+        repeat_tool()
     except FileNotFoundError:
         print("No file or path detected. Current directory is ", directory, ".")
 
@@ -55,16 +55,15 @@ def revert_name(directory, new_word, old_word):
 
 def repeat_tool():
     repeat_input = input(str("Would you like to rename more files? [Y/N] "))
-    if repeat_input.lower() == "y" or "yes":
+    if repeat_input.lower() == "y":
         print("Restarting tool... \n")
-        print(repeat_input)
         main()
-    elif repeat_input.lower == "n" or "no":
-        print(repeat_input)
-        print("Thank you for using the tool!")
+    # elif repeat_input.lower == "n":
+        # print(repeat_input)
+        # print("Thank you for using the tool!")
     else:
-        print("Invalid input. Closing tool.")
-        sys.exit()
+        print("Thank you for using the tool!")
+        return
 
 
 # Driver Code
