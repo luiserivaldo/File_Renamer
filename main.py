@@ -25,9 +25,9 @@ def main():
     try:
         file_renamer(directory, old_word, new_word)
         revert_name(directory, new_word, old_word)
+        repeat_tool()
     except FileNotFoundError:
         print("No file or path detected. Current directory is ", directory, ".")
-    repeat_tool()
 
 
 def file_renamer(directory, old_word, new_word):
