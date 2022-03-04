@@ -28,6 +28,8 @@ def main():
         repeat_tool()
     except FileNotFoundError:
         print("No file or path detected. Current directory is ", directory, ".")
+        print(input("Press 'enter' to close the program..."))
+        sys.exit()
 
 
 def file_renamer(directory, old_word, new_word):
